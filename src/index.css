@@ -1,0 +1,552 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background */
+    --background: #0a0f0d;
+    --surface: #111a14;
+    --surface-hover: #1a2a1f;
+
+    /* Text */
+    --text-primary: #e8f5e9;
+    --text-secondary: #b8c5ba;
+    --text-muted: #8a9588;
+
+    /* Accent (neon green) */
+    --accent: #00ff87;
+    --accent-hover: #00e677;
+    --accent-bg: rgba(0, 255, 135, 0.1);
+    --accent-border: rgba(0, 255, 135, 0.2);
+
+    /* Priority */
+    --priority-high: #ef4444;
+    --priority-medium: #f59e0b;
+    --priority-low: #10b981;
+
+    /* Status */
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --info: #3b82f6;
+
+    /* Time Section Colors (from Student Day Manager) */
+    --morning: #f59e0b;        /* Yellow */
+    --afternoon: #f97316;      /* Orange */
+    --evening: #8b5cf6;        /* Purple */
+
+    /* Borders */
+    --border: rgba(255, 255, 255, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+
+    /* Panic Mode */
+    --panic-bg: #450a0a;
+    --panic-surface: #7f1d1d;
+    --panic-accent: #ef4444;
+    --panic-text: #fecaca;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+
+  /* Typography */
+  .font-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  /* Sidebar (Notion-Inspired) */
+  .notion-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    transition: width 0.3s ease;
+    z-index: 40;
+  }
+  .notion-sidebar-collapsed { width: 60px; }
+  .notion-sidebar-expanded  { width: 240px; }
+
+  .notion-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    margin: 0.25rem 0;
+    border-radius: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .notion-nav-item:hover {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+  }
+  .notion-nav-item.active {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+
+  /* Layout Sections */
+  .notion-section {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    padding: 2rem;
+  }
+  .notion-section-header {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  /* Cards */
+  .notion-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  .notion-card:hover {
+    border-color: var(--border-subtle);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Buttons */
+  .notion-button {
+    background: var(--accent);
+    color: var(--background);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .notion-button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+  .notion-small-button {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .notion-small-button:hover {
+    background: var(--accent);
+    color: var(--background);
+  }
+
+  /* Task Cards */
+  .task-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    height: 140px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: flex-start;
+  }
+  .task-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+  .task-card.completed { opacity: 0.6; }
+  .task-card.completed .task-content {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+
+  /* Priority left-border accents */
+  .priority-high   { border-left: 4px solid var(--priority-high); }
+  .priority-medium { border-left: 4px solid var(--priority-medium); }
+  .priority-low    { border-left: 4px solid var(--priority-low); }
+
+  /* Task Checkbox */
+  .task-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    appearance: none;
+    flex-shrink: 0;
+  }
+  .task-checkbox:checked { background: var(--accent); }
+  .task-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    color: var(--background);
+    font-size: 14px;
+  }
+
+  /* Time Section Cards */
+  .time-section {
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .time-section-morning   { border-top: 3px solid var(--morning); }
+  .time-section-afternoon { border-top: 3px solid var(--afternoon); }
+  .time-section-evening   { border-top: 3px solid var(--evening); }
+
+  .time-section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .time-label-morning   { color: var(--morning); }
+  .time-label-afternoon { color: var(--afternoon); }
+  .time-label-evening   { color: var(--evening); }
+
+  /* Reminder Items */
+  .reminder-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--surface-hover);
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+  }
+  .reminder-item:hover { border-color: var(--border); }
+  .reminder-item.completed { opacity: 0.5; }
+  .reminder-item.completed .reminder-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+  .reminder-item.urgent { border-left: 3px solid var(--priority-high); }
+
+  /* Reminder type badges */
+  .reminder-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-class      { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .badge-quiz       { background: rgba(245,158,11,0.15); color: #fbbf24; }
+  .badge-assignment { background: rgba(239,68,68,0.15);  color: #f87171; }
+  .badge-break      { background: rgba(16,185,129,0.15); color: #34d399; }
+
+  /* Resource Cards */
+  .resource-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--info);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  .resource-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+  .category-badge {
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .concept-bullet {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+  }
+  .concept-bullet::before {
+    content: '•';
+    color: var(--success);
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+  .knowledge-gaps {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  .knowledge-gaps h4 {
+    color: var(--error);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Panic Mode */
+  .panic-mode {
+    background: var(--panic-bg);
+    color: var(--panic-text);
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .panic-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: var(--panic-surface);
+    border-bottom: 2px solid var(--panic-accent);
+    padding: 1rem 2rem;
+    z-index: 50;
+  }
+  .panic-content {
+    margin-top: 6rem;
+    padding: 2rem;
+  }
+  .urgent-task-card {
+    background: var(--panic-surface);
+    border: 1px solid var(--panic-accent);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Inputs */
+  input, textarea, select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-bg);
+  }
+  ::placeholder { color: var(--text-muted); }
+
+  /* Profile Avatar Button */
+  .profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-bg);
+    border: 2px solid var(--accent-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .profile-avatar:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--background);
+  }
+
+  /* Resource Detail Tool Grid */
+  .tool-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+  }
+  .tool-tile:hover {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+    box-shadow: 0 0 0 1px var(--accent-border);
+  }
+
+  /* Chat Bubbles */
+  .chat-bubble-user {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 1rem 1rem 0 1rem;
+    padding: 0.75rem 1rem;
+    max-width: 75%;
+    align-self: flex-end;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+  }
+  .chat-bubble-ai {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem 1rem 1rem 0;
+    padding: 0.75rem 1rem;
+    max-width: 80%;
+    align-self: flex-start;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+  }
+
+  /* Typing Indicator */
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: typingBounce 1.2s infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30%            { transform: translateY(-8px); opacity: 1; }
+  }
+
+  /* Quiz Option Buttons */
+  .quiz-option {
+    width: 100%;
+    text-align: left;
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+  }
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+  }
+  .quiz-option.correct  { border-color: var(--success); background: rgba(34,197,94,0.1); color: #86efac; }
+  .quiz-option.wrong    { border-color: var(--error);   background: rgba(239,68,68,0.1); color: #fca5a5; }
+  .quiz-option:disabled { cursor: default; }
+
+  /* Progress Bar */
+  .progress-bar-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* Difficulty Circle (SVG wrapper) */
+  .difficulty-circle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem auto;
+  }
+
+  /* Concept Map SVG */
+  .concept-map-container {
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    background: var(--background);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+  }
+  .concept-node {
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .concept-node:hover rect { filter: brightness(1.3); }
+  .concept-edge-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    fill: var(--text-muted);
+  }
+
+  /* Socratic Session */
+  .teach-session-header {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(0,255,135,0.05) 100%);
+    border-bottom: 1px solid var(--accent-border);
+    padding: 1rem 1.5rem;
+  }
+  .mastery-banner {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  /* Connection Cards (Cross-Document) */
+  .connection-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--info);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+  }
+  .connection-card:hover {
+    border-left-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .connection-type-badge {
+    background: rgba(59,130,246,0.15);
+    color: #60a5fa;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .notion-section { padding: 1rem; }
+    .notion-sidebar-expanded { width: 100%; }
+  }
+}
