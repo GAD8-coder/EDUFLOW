@@ -7,7 +7,7 @@ Every student has faced this: Multiple deadlines approaching , but which do you 
 Most students guess wrong and end up spending hours on low-impact tasks while high stake exams creeps near.
 
 ## THE SOLUTION ✨
-Eduflow uses **Gemini AI** to:
+Eduflow uses **Groq AI** to:
 1. **Prioritize tasks** using a unique formula: (GRADE WEIGHT * 10) / DAYS until due
 
 2. **Generate Study Plans** when you have 2+ deadlines in 48 hours (PANIC MODE)
@@ -19,7 +19,7 @@ Eduflow uses **Gemini AI** to:
 5. **Provides Ai focused tips** tells you what to do or helps you on what you're actually doing at the moment
 
 
- ## Gemini AI integration:
+ ## Groq integration:
  1. **Panic mode** : 48 hour study schedule generator
 
 2. **Burnout Advice** : Personalised workload management tips
@@ -38,19 +38,19 @@ Eduflow uses **Gemini AI** to:
 - Node.js
 - npm
 - Git
-- Google Gemini Api Key
+- Groq API Key
 
-## Step 1: Get your Gemini API Key
-1. Go to "Google AI studio"[https://aistudio.google.com/]
+## Step 1: Get your Groq API Key
+1. Go to "console.groq.com"[https://console.groq.com/]
 2. Sign in with google account
-3. Click **Git Api key** -- Create a new key
-4. Copy the generated API key (usually starts with "AIza...")
+3. Go to [https://console.groq.com/keys]
+4. create API key
+
 
 ## Step 2: Install Dependencies
 - "npm install"
 
 ##Step 3: Create a ".env" file and paste API key:
-- "VITE_GEMINI_API_KEY = ..your api...key..."
 
 ##Step 4: START DEVELOPMENT SERVER:
 - "npm run dev"
