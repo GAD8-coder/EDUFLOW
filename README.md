@@ -26,12 +26,35 @@ Eduflow uses **Gemini AI** to:
 
 
 ##🔨BUILT WITH🔧:
-- HTML
 - TAILWIND CSS
-- REACT/JAVASCRIPT
+- REACT
 - GOOGLE GEMINI FLASH API
 - LOCAL STRORAGE
 - LUCIDE REACT FOR ICONS
+
+  
+##Steps for getting started..
+**Perequisites
+- Node.js
+- npm
+- Git
+- Google Gemini Api Key
+
+## Step 1: Get your Gemini API Key
+1. Go to "Google AI studio"[https://aistudio.google.com/]
+2. Sign in with google account
+3. Click **Git Api key** -- Create a new key
+4. Copy the generated API key (usually starts with "AIza...")
+
+## Step 2: Install Dependencies
+- "npm install"
+
+##Step 3: Create a ".env" file and paste API key:
+- "VITE_GEMINI_API_KEY = ..your api...key..."
+
+##Step 4: START DEVELOPMENT SERVER:
+- "npm run dev"
+
 
 
 
